@@ -31,5 +31,7 @@ myReverse :: [a] -> [a]
 myReverse [] = []
 myReverse (x : xs) = myReverse xs ++ [x]
 
+-- main = print (myReverse [4, 1, 2, 3, 11])
+
 main :: IO ()
 main = print (myReverse [4, 1, 2, 3, 11])
