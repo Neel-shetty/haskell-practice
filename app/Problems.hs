@@ -13,5 +13,11 @@ myButLast (_ : xs) = myButLast xs
 
 -- main = print (myButLast [4, 1, 2, 3, 11])
 
+elementAt :: [a] -> Integer -> Maybe a
+elementAt (x : _) 1 = Just x
+elementAt (_ : xs) i
+  | i < 1 = Nothing
+  | otherwise = elementAt xs (i - 1)
+
 main :: IO ()
-main = print (myButLast [4, 1, 2, 3, 11])
+main = print (elementAt [4, 1, 2, 3, 11] 3)
