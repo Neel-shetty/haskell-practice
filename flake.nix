@@ -1,22 +1,29 @@
 {
-  description = "flake for haskell development";
+  description = "Flake for Haskell development";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs }:
-     let
-      # define system once
+  outputs = { self, nixpkgs, ... }:
+    let
       system = "x86_64-linux";
-      # use it here, and bind platform-specific packages to `pkgs`
       pkgs = nixpkgs.legacyPackages.${system};
-    in
-      {
+    in {
+      formatter.${system} = pkgs.nixfmt;
+      devShells.${system}.default = pkgs.mkShell {
+        buildInputs = [
+          (pkgs.haskellPackages.ghcWithPackages (haskellPackages: with haskellPackages; [
+            cabal-install
+          ]))
+          pkgs.haskell-language-server
+          pkgs.hlint
+        ];
 
-    packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-
-    packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
-
-  };
+        shellHook = ''
+          exec zsh
+        '';
+      };
+    };
 }
+
