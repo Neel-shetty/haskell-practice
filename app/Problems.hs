@@ -25,5 +25,11 @@ myLength :: [a] -> Integer
 myLength [] = 0
 myLength (_ : xs) = 1 + myLength xs
 
+-- main = print (myLength [4, 1, 2, 3, 11])
+
+myReverse :: [a] -> [a]
+myReverse [] = []
+myReverse (x : xs) = myReverse xs ++ [x]
+
 main :: IO ()
-main = print (myLength [4, 1, 2, 3, 11])
+main = print (myReverse [4, 1, 2, 3, 11])
