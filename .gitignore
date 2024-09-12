@@ -1,3 +1,4 @@
 dist-newstyle/
-*.h1
+*.hi
 *.o
+Problems
