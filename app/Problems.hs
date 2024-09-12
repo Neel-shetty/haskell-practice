@@ -19,5 +19,11 @@ elementAt (_ : xs) i
   | i < 1 = Nothing
   | otherwise = elementAt xs (i - 1)
 
+-- main = print (elementAt [4, 1, 2, 3, 11] 3)
+
+myLength :: [a] -> Integer
+myLength [] = 0
+myLength (_ : xs) = 1 + myLength xs
+
 main :: IO ()
-main = print (elementAt [4, 1, 2, 3, 11] 3)
+main = print (myLength [4, 1, 2, 3, 11])
