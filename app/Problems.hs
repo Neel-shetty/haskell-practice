@@ -33,5 +33,16 @@ myReverse (x : xs) = myReverse xs ++ [x]
 
 -- main = print (myReverse [4, 1, 2, 3, 11])
 
+-- tail recursion
+fac n = aux n 1
+  where
+    aux n acc
+      | n <= 1 = acc
+      | otherwise = aux (n - 1) (n * acc)
+
+elem :: [a] -> a -> Bool
+elem [] _ = False
+elem (x : xs) n = if x == n then True else elem xs
+
 main :: IO ()
-main = print (myReverse [4, 1, 2, 3, 11])
+main = print (fac 5)
